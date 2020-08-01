@@ -30,7 +30,10 @@ function Categoria() {
   }
 
   useEffect(() => {
-    const url = 'http://localhost:8080/categorias';
+    const url = window.location.href.includes('localhost')
+      ? 'http://localhost:8080/categorias'
+      : 'https://aluraflixphos.herokuapp.com/categorias';
+
     fetch(url)
       .then(async (respostaDoServer) => {
         const resposta = await respostaDoServer.json();

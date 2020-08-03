@@ -1,0 +1,23 @@
+table {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+td{
+  outline: solid white;
+  outline-width: 1px;
+  padding: 5px;
+}
+
+th{
+  outline: solid white;
+  padding: 5px;
+  font-size: 18px;
+  outline-width: 1px;
+ /*  align-items: flex-start; */
+}
+
+div.group-table{
+  display: flex;
+  flex-direction: column;
+  
+}

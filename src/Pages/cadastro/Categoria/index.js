@@ -3,6 +3,37 @@ import { Link } from 'react-router-dom';
 import PageDefault from '../../../components/PageDefault';
 import FormField from '../../../components/FormField';
 import Button from '../../../components/Button';
+import './styles.css';
+import useForm from '../../../hooks/useForm';
+
+// function useForm(valoresIniciais) {
+//   const [valores, setValores] = useState(valoresIniciais);
+
+//   function setValue(chave, valor) {
+//     // chave: nome, descricao, bla, bli
+//     setValores({
+//       ...valores,
+//       [chave]: valor, // nome: 'valor'
+//     });
+//   }
+
+//   function handleChange(infosDoEvento) {
+//     setValue(
+//       infosDoEvento.target.getAttribute('name'),
+//       infosDoEvento.target.value,
+//     );
+//   }
+
+//   function clearForm() {
+//     setValores(valoresIniciais);
+//   }
+
+//   return {
+//     valores,
+//     handleChange,
+//     clearForm,
+//   };
+// }
 
 function Categoria() {
   // eslint-disable-next-line
@@ -14,19 +45,21 @@ function Categoria() {
     cor: '#ffffff',
   };
 
-  const [valores, setValores] = useState(valoresIniciais);
+  // const [valores, setValores] = useState(valoresIniciais);
 
-  function handleChange(e) {
-    setValores({
-      ...valores,
-      [e.target.name]: e.target.value,
-    });
-  }
+  // function handleChange(e) {
+  //   setValores({
+  //     ...valores,
+  //     [e.target.name]: e.target.value,
+  //   });
+  // }
+
+  const { handleChange, valores, clearForm } = useForm(valoresIniciais);
 
   function handleOnSubmit(e) {
     e.preventDefault();
     setCategorias([...categorias, valores]);
-    setValores(valoresIniciais);
+    clearForm();
   }
 
   useEffect(() => {
@@ -47,7 +80,7 @@ function Categoria() {
         {' '}
         {valores.nome}
       </h1>
-      <form onSubmit={(e) => { handleOnSubmit(e); }}>
+      <form onSubmit={handleOnSubmit}>
         <FormField
           label="Nome da Categoria"
           type="text"
@@ -77,13 +110,20 @@ function Categoria() {
         </Button>
       </form>
 
-      <ul>
-        {categorias.map((categoria, indice) => (
-          <li key={indice}>
-            {categoria.nome}
-          </li>
-        ))}
-      </ul>
+      {/* <div className="group-table">
+        <table>
+          <tr>
+            <th>Categoria</th>
+            <th>Cor</th>
+          </tr>
+          {categorias.map((categoria, indice) => (
+            <tr key={indice}>
+              <td>{categoria.titulo}</td>
+              <td>{categoria.cor}</td>
+            </tr>
+          ))}
+        </table>
+      </div> */}
 
       <Link to="/">
         Ir para Home
